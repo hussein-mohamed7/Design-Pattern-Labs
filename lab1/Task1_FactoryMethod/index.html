@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import StudentFactory from "./StudentFactory.js";
+        const Student1 =StudentFactory.CreateStudent("offline","Hussein",23,"Beginner")
+        const Student2 =StudentFactory.CreateStudent("online","Mohamed",23,"Advanced")
+        console.log(Student1.getDetails());
+        console.log(Student2.getDetails());
+    </script>
+</body>
+</html>
