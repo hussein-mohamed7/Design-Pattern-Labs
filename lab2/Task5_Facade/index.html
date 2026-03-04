@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    class Inventory {
+        turnOn() {
+            console.log("Inventory system is ON: products ready");
+        }
+        turnOff() {
+            console.log("Inventory system is OFF");
+        }
+    }
+
+    class Payment {
+        turnOn() {
+            console.log("Payment system is ON: ready to process");
+        }
+        turnOff() {
+            console.log("Payment system is OFF");
+        }
+    }
+
+    class Shipping {
+        turnOn() {
+            console.log("Shipping system is ON: ready to ship orders");
+        }
+        turnOff() {
+            console.log("Shipping system is OFF");
+        }
+    }
+    class StoreFacade {
+        constructor() {
+            this.inventory = new Inventory();
+            this.payment = new Payment();
+            this.shipping = new Shipping();
+        }
+
+        Start() {
+            console.log("Starting your online store order...");
+            this.inventory.turnOn();
+            this.payment.turnOn();
+            this.shipping.turnOn();
+        }
+
+        End() {
+            console.log("Ending your order process...");
+            this.inventory.turnOff();
+            this.payment.turnOff();
+            this.shipping.turnOff();
+            }
+    }
+        const store = new StoreFacade();
+        store.Start();
+        store.End();
+    </script>
+</body>
+</html>
