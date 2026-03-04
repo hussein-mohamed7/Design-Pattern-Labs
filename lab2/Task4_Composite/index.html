@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Item {
+            getPages() {
+                throw new Error("This method must be implemented");
+            }
+            showHierarchy(indent = "") {
+                throw new Error("This method must be implemented");
+            }
+        }
+
+        class Book extends Item {
+            constructor(name, pages) {
+                super();
+                this.name = name;
+                this.pages = pages;
+            }
+            getPages() {
+                return this.pages;
+            }
+            showHierarchy(indent = "") {
+                console.log(`${indent}- Book: ${this.name}, Pages: ${this.pages}`);
+            }
+        }
+        class Box extends Item {
+            constructor(name) {
+                super();
+                this.name = name;
+                this.items = [];
+            }
+            add(item) {
+                this.items.push(item);
+            }
+            getPages() {
+                return this.items.reduce((total, item) => total + item.getPages(), 0);
+            }
+            showHierarchy(indent = "") {
+                console.log(`${indent}+ Box: ${this.name}, Total Pages: ${this.getPages()}`);
+                this.items.forEach(item => item.showHierarchy(indent + "  "));
+            }
+        }
+        const book1 = new Book("Book 1", 100);
+        const book2 = new Book("Book 2", 200);
+        const book3 = new Book("Book 3", 150);
+
+        const smallBox = new Box("Small Box");
+        smallBox.add(book1);
+        smallBox.add(book2);
+
+        const bigBox = new Box("Big Box");
+        bigBox.add(smallBox);
+        bigBox.add(book3);
+
+        bigBox.showHierarchy();
+        console.log("Total pages in Big Box:", bigBox.getPages());
+    </script>
+</body>
+</html>

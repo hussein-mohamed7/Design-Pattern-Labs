@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class AbstractState {
+            handle(){};
+        }
+
+        class StateInProgress extends AbstractState {
+            handle() {
+                console.log("Task is IN PROGRESS");
+            }
+        }
+
+        class StateReadyForReview extends AbstractState {
+            handle() {
+                console.log("Task is READY FOR REVIEW");
+            }
+        }
+
+        class StateDone extends AbstractState {
+            handle() {
+                console.log("Task is DONE");
+            }
+        }
+        class Task {
+            constructor(state){
+                switch(state) {
+                    case "inProgress":
+                        this.state = new StateInProgress();
+                        break;
+                    case "readyForReview":
+                        this.state = new StateReadyForReview();
+                        break;
+                    case "done":
+                        this.state = new StateDone();
+                        break;
+                    default:
+                        this.state = new StateInProgress();
+                        break;
+                }
+            }
+            Request(){
+                this.state.handle();
+            }
+        }
+
+        const task1 = new Task("inProgress");
+        task1.Request();
+
+        const task2 = new Task("readyForReview");
+        task2.Request();
+
+        const task3 = new Task("done");
+        task3.Request();
+    </script>
+</body>
+</html>
